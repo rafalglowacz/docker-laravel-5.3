@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=db
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=db
+      - MYSQL_PASSWORD=db
+      
+  app:
+    image: rafal87/laravel53
+    tty: true
+    depends_on:
+      - mysql
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./:/home/deploy/public/app
+      - /home/deploy/public/app/node_modules
+      - /home/deploy/public/app/vendor/bin
